@@ -181,8 +181,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                 let restartScene = RestartScene(size: self.size)
                 self.view?.presentScene(restartScene, transition: restartTransition)
             }
-            
-        
         
     }
     }
