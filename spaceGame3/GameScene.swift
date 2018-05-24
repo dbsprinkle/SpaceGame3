@@ -35,11 +35,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     var customBackgroundColor = UIColor(red: 0.000, green: 0.001, blue: 0.153, alpha: 1)
     
+    var livesArray:[SKSpriteNode]!
     
     
     
     
     override func didMove(to view: SKView) {
+         addLives()
         //create the star field as a SKEmitterNode  and give it a position
         starField = SKEmitterNode(fileNamed: "StarField")
         starField.position = CGPoint(x: 0, y: 1400)
@@ -79,8 +81,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         score = 0
         self.addChild(scoreLabel)
         
+        var timeInterval = 0.75
+        if UserDefaults.standard.bool(forKey: "hard") {
+            timeInterval = 0.3
+        }
+        
         //add an asteroid after time interval(change this to make the game more difficult)
-        obstacleTimer = Timer.scheduledTimer(timeInterval: 0.75, target: self, selector: #selector(addObstacle), userInfo: nil, repeats: true)
+        obstacleTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(addObstacle), userInfo: nil, repeats: true)
         //gets the acceleration data(how fast you are moving the phone)
         motionManager.accelerometerUpdateInterval = 0.2
         motionManager.startAccelerometerUpdates(to: OperationQueue.current!) {(data:CMAccelerometerData?, error:Error?) in
@@ -91,7 +98,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         }
     }
     
-    
+    func addLives() {
+        livesArray = [SKSpriteNode]()
+        
+        for live in 1...3 {
+            let liveNode = SKSpriteNode(imageNamed: "rocket-cutout-fire-1")
+            liveNode.position = CGPoint(x: self.frame.size.width - CGFloat(4-live) * liveNode.size.width, y: self.frame.size.height - 60)
+            self.addChild(liveNode)
+        }
+    }
     
     
     //add an asteroid to the screen at a random position and removes it when it goes off the bottom
@@ -116,6 +131,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         actionArray.append(SKAction.removeFromParent())
         
         obstacle.run(SKAction.sequence(actionArray))
+        
+        
     }
     
   
@@ -153,9 +170,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         self.run(SKAction.wait(forDuration: 1)){
             explosion.removeFromParent()
         
-        let restartTransition = SKTransition.fade(withDuration: 0.5)
-        let restartScene = RestartScene(size: self.size)
-        self.view?.presentScene(restartScene, transition: restartTransition)
+            if self.livesArray.count > 0 {
+                let liveNode = self.livesArray.first
+                liveNode!.removeFromParent()
+                self.livesArray.removeFirst()
+            }
+            if self.livesArray.count == 0 {
+                //transition to gameover
+                let restartTransition = SKTransition.fade(withDuration: 0.5)
+                let restartScene = RestartScene(size: self.size)
+                self.view?.presentScene(restartScene, transition: restartTransition)
+            }
+            
+        
+        
     }
     }
     

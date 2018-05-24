@@ -16,6 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        // Prevent the screen from being dimmed to avoid interuppting the AR experience.
+        UIApplication.shared.isIdleTimerDisabled = true
         return true
     }
 

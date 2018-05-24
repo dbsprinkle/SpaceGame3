@@ -19,6 +19,9 @@
 		6C53AAD420B5B70900E6FCF1 /* RestartScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6C53AAD320B5B70900E6FCF1 /* RestartScene.sks */; };
 		6C53AAD620B5B7E200E6FCF1 /* StarField.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6C53AAD520B5B7E200E6FCF1 /* StarField.sks */; };
 		6C53AAD820B5B80D00E6FCF1 /* explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6C53AAD720B5B80D00E6FCF1 /* explosion.sks */; };
+		AC0AF96320B70EC400D97D7E /* blastoff.sks in Resources */ = {isa = PBXBuildFile; fileRef = AC0AF96020B70EC300D97D7E /* blastoff.sks */; };
+		AC0AF96420B70EC400D97D7E /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AF96120B70EC400D97D7E /* MenuScene.swift */; };
+		AC0AF96520B70EC400D97D7E /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = AC0AF96220B70EC400D97D7E /* MenuScene.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +39,9 @@
 		6C53AAD320B5B70900E6FCF1 /* RestartScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RestartScene.sks; sourceTree = "<group>"; };
 		6C53AAD520B5B7E200E6FCF1 /* StarField.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StarField.sks; sourceTree = "<group>"; };
 		6C53AAD720B5B80D00E6FCF1 /* explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = explosion.sks; sourceTree = "<group>"; };
+		AC0AF96020B70EC300D97D7E /* blastoff.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = blastoff.sks; sourceTree = "<group>"; };
+		AC0AF96120B70EC400D97D7E /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
+		AC0AF96220B70EC400D97D7E /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +83,9 @@
 				6C53AABF20B5B6B500E6FCF1 /* GameViewController.swift */,
 				6C53AAD720B5B80D00E6FCF1 /* explosion.sks */,
 				6C53AAD520B5B7E200E6FCF1 /* StarField.sks */,
+				AC0AF96020B70EC300D97D7E /* blastoff.sks */,
+				AC0AF96220B70EC400D97D7E /* MenuScene.sks */,
+				AC0AF96120B70EC400D97D7E /* MenuScene.swift */,
 				6C53AAC120B5B6B500E6FCF1 /* Main.storyboard */,
 				6C53AAC420B5B6B700E6FCF1 /* Assets.xcassets */,
 				6C53AAC620B5B6B700E6FCF1 /* LaunchScreen.storyboard */,
@@ -143,8 +152,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC0AF96320B70EC400D97D7E /* blastoff.sks in Resources */,
 				6C53AAC320B5B6B500E6FCF1 /* Main.storyboard in Resources */,
 				6C53AABA20B5B6B500E6FCF1 /* GameScene.sks in Resources */,
+				AC0AF96520B70EC400D97D7E /* MenuScene.sks in Resources */,
 				6C53AAC520B5B6B700E6FCF1 /* Assets.xcassets in Resources */,
 				6C53AAC820B5B6B700E6FCF1 /* LaunchScreen.storyboard in Resources */,
 				6C53AAD620B5B7E200E6FCF1 /* StarField.sks in Resources */,
@@ -163,6 +174,7 @@
 			files = (
 				6C53AAD020B5B6E500E6FCF1 /* RestartScene.swift in Sources */,
 				6C53AABE20B5B6B500E6FCF1 /* GameScene.swift in Sources */,
+				AC0AF96420B70EC400D97D7E /* MenuScene.swift in Sources */,
 				6C53AAC020B5B6B500E6FCF1 /* GameViewController.swift in Sources */,
 				6C53AAB820B5B6B500E6FCF1 /* AppDelegate.swift in Sources */,
 			);
