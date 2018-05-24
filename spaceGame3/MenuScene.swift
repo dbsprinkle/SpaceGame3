@@ -50,8 +50,11 @@ class MenuScene: SKScene {
             let nodesArray = self.nodes(at: location)
             if nodesArray.first == newGameButtonNode {
                 let transition = SKTransition.flipVertical(withDuration: 0.5)
-                let gameScene = GameScene(size: self.size)
-                self.view?.presentScene(gameScene, transition: transition)
+                if let gameScene = SKScene(fileNamed: "GameScene"){
+                    gameScene.scaleMode = .aspectFill
+                    self.view?.presentScene(gameScene, transition: transition)
+                }
+                
                 //rocketBlastoff()
                 print("New Game")
             } else if nodesArray.first?.name == "difficultyButton" {
