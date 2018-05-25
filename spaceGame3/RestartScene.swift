@@ -12,6 +12,7 @@ class RestartScene: SKScene {
     
     var starField:SKEmitterNode!
     var restartButtonNode:SKSpriteNode!
+    var backToMenuButtonNode:SKSpriteNode!
     var destroyedLabel:SKLabelNode!
     
     var customBackgroundColor = UIColor(red: 0.000, green: 0.001, blue: 0.153, alpha: 1)
@@ -30,6 +31,10 @@ class RestartScene: SKScene {
         restartButtonNode.position = CGPoint(x: 375, y: 550)
         self.addChild(restartButtonNode)
         
+        backToMenuButtonNode = SKSpriteNode(imageNamed: "backToMenuTexture")
+        backToMenuButtonNode.position = CGPoint(x: 375, y: 400)
+        self.addChild(backToMenuButtonNode)
+        
         //create and add label
         destroyedLabel = SKLabelNode(text: "Your rocket was destroyed")
         destroyedLabel.position = CGPoint(x: 375, y: 1000)
@@ -47,6 +52,13 @@ class RestartScene: SKScene {
                 let transition = SKTransition.fade(withDuration: 0.5)
                 if let scene = SKScene(fileNamed: "GameScene") {
                     // Set the scale mode to scale to fit the window
+                    scene.scaleMode = .aspectFill
+                    self.view?.presentScene(scene, transition: transition)
+                }
+            }
+            if nodesArray.first == backToMenuButtonNode{
+                let transition = SKTransition.fade(withDuration: 0.5)
+                if let scene = MenuScene(fileNamed: "MenuScene"){
                     scene.scaleMode = .aspectFill
                     self.view?.presentScene(scene, transition: transition)
                 }
