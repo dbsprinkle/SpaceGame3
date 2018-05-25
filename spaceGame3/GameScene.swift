@@ -32,6 +32,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     let motionManager = CMMotionManager()
     var xAcceleration:CGFloat = 0
+    var yAccerleration:CGFloat = 0
     
     var customBackgroundColor = UIColor(red: 0.000, green: 0.001, blue: 0.153, alpha: 1)
     
@@ -94,6 +95,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             if let accelerometerData = data{
                 let accelerometer = accelerometerData.acceleration
                 self.xAcceleration = CGFloat(accelerometer.x * 0.75) + self.xAcceleration * 0.25
+                self.yAccerleration = CGFloat(accelerometer.y * 0.75) + self.xAcceleration * 0.25
             }
         }
     }
@@ -234,12 +236,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     //moves the rocket using the accelerator data
     override func didSimulatePhysics() {
         rocket.position.x += xAcceleration * 50
-        if rocket.position.x < -500{
+        rocket.position.y += yAccerleration * 50
+        if rocket.position.x < -500 {
             rocket.position = CGPoint(x: self.size.width + 20, y: rocket.position.y)
         }else if rocket.position.x > self.size.width + 20{
             rocket.position = CGPoint(x: -20, y: rocket.position.y)
         }
-        
+        if rocket.position.y < -650{
+            rocket.position = CGPoint(x: rocket.position.x, y: self.size.height + 20)
+        }else if rocket.position.y > self.size.height + 20{
+            rocket.position = CGPoint(x: rocket.position.x, y: -20)
+    }
     }
     
     override func update(_ currentTime: TimeInterval) {
