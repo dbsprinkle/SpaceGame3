@@ -95,7 +95,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             if let accelerometerData = data{
                 let accelerometer = accelerometerData.acceleration
                 self.xAcceleration = CGFloat(accelerometer.x * 0.75) + self.xAcceleration * 0.25
-                self.yAccerleration = CGFloat(accelerometer.y * 0.75) + self.xAcceleration * 0.25
+                //self.yAccerleration = CGFloat(accelerometer.y * 0.75) + self.xAcceleration * 0.25
             }
         }
     }
@@ -165,28 +165,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         explosion.position = rocketNode.position
         self.addChild(explosion)
         
-        self.run(SKAction.playSoundFileNamed("Blast-Sound.mp3", waitForCompletion: false))
+        self.run(SKAction.playSoundFileNamed("Blast-Sound.mp3", waitForCompletion: true))
         
         obstacleNode.removeFromParent()
         rocketNode.removeFromParent()
         
         self.run(SKAction.wait(forDuration: 1)){
             explosion.removeFromParent()
-        
-            if self.livesArray.count > 0 {
-                let liveNode = self.livesArray.first
-                liveNode!.removeFromParent()
-                self.livesArray.removeFirst()
+        }
+        if self.livesArray.count > 0 {
+            let liveNode = self.livesArray.first
+            liveNode!.removeFromParent()
+            self.livesArray.removeFirst()
+            self.run(SKAction.wait(forDuration: 1)){
                 self.addChild(rocketNode)
             }
-            if self.livesArray.count == 0 {
-                //transition to gameover
+        }
+        if self.livesArray.count == 0 {
+            //transition to gameover
+            self.run(SKAction.wait(forDuration: 1)){
                 let restartTransition = SKTransition.fade(withDuration: 0.5)
                 let restartScene = RestartScene(size: self.size)
                 self.view?.presentScene(restartScene, transition: restartTransition)
             }
-        
-    }
+        }
     }
     
     
@@ -204,6 +206,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         laser.physicsBody?.usesPreciseCollisionDetection = true
         
         self.addChild(laser)
+        self.run(SKAction.playSoundFileNamed("Laser-Blaster.mp3", waitForCompletion: false))
         
         var actionArray = [SKAction]()
         actionArray.append(SKAction.move(to: CGPoint(x: rocket.position.x, y: self.frame.size.height + 10), duration: 0.3))
@@ -222,8 +225,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         let explosion = SKEmitterNode(fileNamed: "explosion")!
         explosion.position = obstacleNode.position
         self.addChild(explosion)
-        
-        self.run(SKAction.playSoundFileNamed("Blast_Sound.mp3", waitForCompletion: false))
+        self.run(SKAction.playSoundFileNamed("Blast-Sound.mp3", waitForCompletion: false))
         
         obstacleNode.removeFromParent()
         laserNode.removeFromParent()
