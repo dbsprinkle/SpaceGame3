@@ -41,7 +41,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     
     override func didMove(to view: SKView) {
-         addLives()
+        addLives()
         //create the star field as a SKEmitterNode  and give it a position
         starField = SKEmitterNode(fileNamed: "StarField")
         starField.position = CGPoint(x: 0, y: 1400)
@@ -101,9 +101,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     func addLives() {
         livesArray = [SKSpriteNode]()
         
-        for live in 1...3 {
+        for life in 1...3 {
             let liveNode = SKSpriteNode(imageNamed: "rocket-cutout-fire-1")
-            liveNode.position = CGPoint(x: self.frame.size.width - CGFloat(4-live) * liveNode.size.width, y: self.frame.size.height - 60)
+            livesArray.append(liveNode)
+            liveNode.position = CGPoint(x: self.frame.size.width - CGFloat(4-life) * liveNode.size.width, y: self.frame.size.height - 60)
             self.addChild(liveNode)
         }
     }
@@ -174,6 +175,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                 let liveNode = self.livesArray.first
                 liveNode!.removeFromParent()
                 self.livesArray.removeFirst()
+                self.addChild(rocketNode)
             }
             if self.livesArray.count == 0 {
                 //transition to gameover
