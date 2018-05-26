@@ -95,7 +95,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             if let accelerometerData = data{
                 let accelerometer = accelerometerData.acceleration
                 self.xAcceleration = CGFloat(accelerometer.x * 0.75) + self.xAcceleration * 0.25
-                self.yAccerleration = CGFloat(accelerometer.y * 0.75) + self.xAcceleration * 0.25
+                //self.yAccerleration = CGFloat(accelerometer.y * 0.75) + self.xAcceleration * 0.25
             }
         }
     }
@@ -165,7 +165,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         explosion.position = rocketNode.position
         self.addChild(explosion)
         
-        self.run(SKAction.playSoundFileNamed("Blast-Sound.mp3", waitForCompletion: false))
+        //self.run(SKAction.playSoundFileNamed("Blast-Sound.mp3", waitForCompletion: false))
         
         obstacleNode.removeFromParent()
         rocketNode.removeFromParent()
@@ -223,7 +223,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         explosion.position = obstacleNode.position
         self.addChild(explosion)
         
-        self.run(SKAction.playSoundFileNamed("Blast_Sound.mp3", waitForCompletion: false))
+        //self.run(SKAction.playSoundFileNamed("Blast_Sound.mp3", waitForCompletion: false))
         
         obstacleNode.removeFromParent()
         laserNode.removeFromParent()
@@ -232,23 +232,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             explosion.removeFromParent()
     }
         score += 1
+        
+        if score > 5{
+            let transition = SKTransition.fade(withDuration: 0.5)
+            if let scene = SKScene(fileNamed: "coinScene") {
+                // Set the scale mode to scale to fit the window
+                scene.scaleMode = .aspectFill
+                self.view?.presentScene(scene, transition: transition)
+            }
+        }
     }
     
     
     //moves the rocket using the accelerator data
     override func didSimulatePhysics() {
         rocket.position.x += xAcceleration * 50
-        rocket.position.y += yAccerleration * 50
+       // rocket.position.y += yAccerleration * 50
         if rocket.position.x < -500 {
             rocket.position = CGPoint(x: self.size.width + 20, y: rocket.position.y)
         }else if rocket.position.x > self.size.width + 20{
             rocket.position = CGPoint(x: -20, y: rocket.position.y)
         }
-        if rocket.position.y < -650{
+        /*if rocket.position.y < -500{
             rocket.position = CGPoint(x: rocket.position.x, y: self.size.height + 20)
         }else if rocket.position.y > self.size.height + 20{
             rocket.position = CGPoint(x: rocket.position.x, y: -20)
-    }
+    }*/
     }
     
     override func update(_ currentTime: TimeInterval) {

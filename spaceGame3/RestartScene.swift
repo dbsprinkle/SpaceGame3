@@ -32,7 +32,7 @@ class RestartScene: SKScene {
         self.addChild(restartButtonNode)
         
         backToMenuButtonNode = SKSpriteNode(imageNamed: "backToMenuTexture")
-        backToMenuButtonNode.position = CGPoint(x: 375, y: 400)
+        backToMenuButtonNode.position = CGPoint(x: 375, y: 350)
         self.addChild(backToMenuButtonNode)
         
         //create and add label
