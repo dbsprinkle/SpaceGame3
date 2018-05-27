@@ -24,6 +24,7 @@
 		AC0AF96520B70EC400D97D7E /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = AC0AF96220B70EC400D97D7E /* MenuScene.sks */; };
 		AC0AF96720B849B500D97D7E /* Blast-Sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC0AF96620B849B400D97D7E /* Blast-Sound.mp3 */; };
 		AC0AF96920B8528700D97D7E /* Laser-Blaster.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC0AF96820B8528700D97D7E /* Laser-Blaster.mp3 */; };
+		AC0AF96B20BA897000D97D7E /* You-lose-sound-effect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC0AF96A20BA896F00D97D7E /* You-lose-sound-effect.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		AC0AF96220B70EC400D97D7E /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
 		AC0AF96620B849B400D97D7E /* Blast-Sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Blast-Sound.mp3"; sourceTree = "<group>"; };
 		AC0AF96820B8528700D97D7E /* Laser-Blaster.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Laser-Blaster.mp3"; sourceTree = "<group>"; };
+		AC0AF96A20BA896F00D97D7E /* You-lose-sound-effect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "You-lose-sound-effect.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 				AC0AF96220B70EC400D97D7E /* MenuScene.sks */,
 				AC0AF96120B70EC400D97D7E /* MenuScene.swift */,
 				6C53AAC120B5B6B500E6FCF1 /* Main.storyboard */,
+				AC0AF96A20BA896F00D97D7E /* You-lose-sound-effect.mp3 */,
 				6C53AAC420B5B6B700E6FCF1 /* Assets.xcassets */,
 				6C53AAC620B5B6B700E6FCF1 /* LaunchScreen.storyboard */,
 				6C53AAC920B5B6B700E6FCF1 /* Info.plist */,
@@ -161,6 +164,7 @@
 				AC0AF96320B70EC400D97D7E /* blastoff.sks in Resources */,
 				AC0AF96720B849B500D97D7E /* Blast-Sound.mp3 in Resources */,
 				6C53AAC320B5B6B500E6FCF1 /* Main.storyboard in Resources */,
+				AC0AF96B20BA897000D97D7E /* You-lose-sound-effect.mp3 in Resources */,
 				6C53AABA20B5B6B500E6FCF1 /* GameScene.sks in Resources */,
 				AC0AF96920B8528700D97D7E /* Laser-Blaster.mp3 in Resources */,
 				AC0AF96520B70EC400D97D7E /* MenuScene.sks in Resources */,
