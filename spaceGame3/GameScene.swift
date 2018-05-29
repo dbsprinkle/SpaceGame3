@@ -129,6 +129,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
         self.addChild(obstacle)
         
+        //moves the obstacle down and off the screen
         var actionArray = [SKAction]()
         actionArray.append(SKAction.move(to:CGPoint(x: position, y:-750), duration: 6))
         actionArray.append(SKAction.removeFromParent())
@@ -159,7 +160,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         }
     }
     
-    //removes the rocket and asteroid if the collided and shows an explosion for 2 seconds
+    //removes the rocket and asteroid if the collided and shows an explosion a certian amount of time
     func rocketCrashedIntoObstacle(obstacleNode:SKSpriteNode, rocketNode:SKSpriteNode){
         let explosion = SKEmitterNode(fileNamed: "explosion")!
         explosion.position = rocketNode.position
@@ -190,7 +191,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     }
     
     
-   
+   //laser animation from rocket
     func fireLaser(){
         let laser = SKSpriteNode(imageNamed: "laser")
         laser.position = rocket.position
@@ -205,6 +206,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
         self.addChild(laser)
         
+        //moves the laser up a off the screen
         var actionArray = [SKAction]()
         actionArray.append(SKAction.move(to: CGPoint(x: rocket.position.x, y: self.frame.size.height + 10), duration: 0.3))
         actionArray.append(SKAction.removeFromParent())
@@ -212,12 +214,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         laser.run(SKAction.sequence(actionArray))
         
     }
-    
+    //fires laser from rocket when screen is tapped
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         fireLaser()
     }
  
-    
+    //removes the obstacle the laser hit with explosion
     func laserHitObstacle(obstacleNode:SKSpriteNode, laserNode:SKSpriteNode){
         let explosion = SKEmitterNode(fileNamed: "explosion")!
         explosion.position = obstacleNode.position
@@ -232,8 +234,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             explosion.removeFromParent()
     }
         score += 1
-        
-        if score > 5{
+        //transitions to coin level once a certian score is reached
+        if score > 35{
             let transition = SKTransition.fade(withDuration: 0.5)
             if let scene = SKScene(fileNamed: "coinScene") {
                 // Set the scale mode to scale to fit the window

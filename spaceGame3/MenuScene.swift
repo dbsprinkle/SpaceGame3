@@ -45,7 +45,7 @@ class MenuScene: SKScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
-        print("touches began")
+       //print("touches began")
         if let location = touch?.location(in: self){
             let nodesArray = self.nodes(at: location)
             if nodesArray.first == newGameButtonNode {
@@ -56,11 +56,20 @@ class MenuScene: SKScene {
                 }
                 
                 //rocketBlastoff()
-                print("New Game")
+                //print("New Game")
             } else if nodesArray.first?.name == "difficultyButton" {
                 changeDifficulty()
+            }else if nodesArray.first?.name == "rocket1" {
+                changeRocket()
             }
         }
+    }
+    
+    func changeRocket(){
+        rocket1Node.removeFromParent()
+        let rocketNode = SKSpriteNode(imageNamed: "smallRocketNeg")
+        rocketNode.position = rocket1Node.position
+        self.addChild(rocketNode)
     }
     
     func changeDifficulty() {
