@@ -102,11 +102,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     func addLives() {
         livesArray = [SKSpriteNode]()
-        
-        for life in 1...3 {
+        var x = 200
+        for _ in 1...3 {
             let liveNode = SKSpriteNode(imageNamed: "rocket-cutout-fire-1")
             livesArray.append(liveNode)
-            liveNode.position = CGPoint(x: self.frame.size.width - CGFloat(4-life) * liveNode.size.width, y: self.frame.size.height - 60)
+            liveNode.position = CGPoint(x: x, y: 600)
+            x = x + 35
             self.addChild(liveNode)
         }
     }
