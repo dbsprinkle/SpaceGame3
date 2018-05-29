@@ -21,6 +21,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             scoreLabel.text = "Score: \(score)"
         }
     }
+    var highScoreLabel:SKLabelNode!
+    var highScore = UserDefaults().integer(forKey: "HIGHSCORE") {
+        didSet{
+            highScoreLabel.text = "High Score: \(highScore)"
+        }
+    }
     
     var obstacleTimer:Timer!
     
@@ -68,6 +74,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         rocket.physicsBody?.contactTestBitMask = obstacleCategory
         rocket.physicsBody?.collisionBitMask = 0
         rocket.physicsBody?.usesPreciseCollisionDetection = true
+    
+        let range = SKRange(lowerLimit: -340, upperLimit: 340)
+        let range2 = SKRange(lowerLimit: -650, upperLimit: 650)
+        
+        let lockToCenter = SKConstraint.positionX(range, y: range2)
+        
+        rocket.constraints = [ lockToCenter ]
         
         //no gravity
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
@@ -81,6 +94,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         scoreLabel.fontColor = UIColor.white
         score = 0
         self.addChild(scoreLabel)
+        highScoreLabel = SKLabelNode(text: "Score: \(highScore)")
+        highScoreLabel.position = CGPoint(x: -300, y: 550)
+        highScoreLabel.fontName = "PingFangSC-Light"
+        highScoreLabel.fontSize = 32
+        highScoreLabel.fontColor = UIColor.white
+        self.addChild(highScoreLabel)
         
         var timeInterval = 0.75
         if UserDefaults.standard.bool(forKey: "hard") {
@@ -102,11 +121,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     func addLives() {
         livesArray = [SKSpriteNode]()
-        
-        for life in 1...3 {
+        var x = 200
+        for _ in 1...3 {
             let liveNode = SKSpriteNode(imageNamed: "rocket-cutout-fire-1")
             livesArray.append(liveNode)
-            liveNode.position = CGPoint(x: self.frame.size.width - CGFloat(4-life) * liveNode.size.width, y: self.frame.size.height - 60)
+            liveNode.position = CGPoint(x: x, y: 600)
+            x = x + 35
             self.addChild(liveNode)
         }
     }
@@ -173,21 +193,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
         self.run(SKAction.wait(forDuration: 1)){
             explosion.removeFromParent()
-        
-            if self.livesArray.count > 0 {
-                let liveNode = self.livesArray.first
-                liveNode!.removeFromParent()
-                self.livesArray.removeFirst()
+        }
+        if self.livesArray.count > 0 {
+            let liveNode = self.livesArray.first
+            liveNode!.removeFromParent()
+            self.livesArray.removeFirst()
+            self.run(SKAction.wait(forDuration: 1)){
                 self.addChild(rocketNode)
             }
-            if self.livesArray.count == 0 {
-                //transition to gameover
+        }
+        if self.livesArray.count == 0 {
+            //transition to gameover
+            self.run(SKAction.wait(forDuration: 1)){
                 let restartTransition = SKTransition.fade(withDuration: 0.5)
                 let restartScene = RestartScene(size: self.size)
                 self.view?.presentScene(restartScene, transition: restartTransition)
             }
-        
-    }
+        }
     }
     
     
@@ -205,6 +227,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         laser.physicsBody?.usesPreciseCollisionDetection = true
         
         self.addChild(laser)
+        self.run(SKAction.playSoundFileNamed("Laser-Blaster.mp3", waitForCompletion: false))
         
         //moves the laser up a off the screen
         var actionArray = [SKAction]()
@@ -232,7 +255,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
         self.run(SKAction.wait(forDuration: 1)){
             explosion.removeFromParent()
-    }
+        }
         score += 1
         //transitions to coin level once a certian score is reached
         if score > 35{
@@ -245,6 +268,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         }
     }
     
+    func saveHighScore() {
+        UserDefaults().set(score, forKey: "HIGHSCORE")
+        
+    }
     
     //moves the rocket using the accelerator data
     override func didSimulatePhysics() {

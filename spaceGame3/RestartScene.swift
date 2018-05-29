@@ -42,6 +42,7 @@ class RestartScene: SKScene {
         destroyedLabel.fontSize = 58
         destroyedLabel.fontColor = UIColor.white
         self.addChild(destroyedLabel)
+        self.run(SKAction.playSoundFileNamed("You-lose-sound-effect.mp3", waitForCompletion: false))
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
