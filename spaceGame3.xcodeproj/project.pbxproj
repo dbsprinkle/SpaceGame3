@@ -26,7 +26,6 @@
 		AC0AF96520B70EC400D97D7E /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = AC0AF96220B70EC400D97D7E /* MenuScene.sks */; };
 		AC0AF96920B8528700D97D7E /* Laser-Blaster.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC0AF96820B8528700D97D7E /* Laser-Blaster.mp3 */; };
 		AC0AF96B20BA897000D97D7E /* You-lose-sound-effect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC0AF96A20BA896F00D97D7E /* You-lose-sound-effect.mp3 */; };
-		AC0AF97A20BD8B3A00D97D7E /* Blast-Sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC0AF97920BD8B3A00D97D7E /* Blast-Sound.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,7 +51,6 @@
 		AC0AF96220B70EC400D97D7E /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
 		AC0AF96820B8528700D97D7E /* Laser-Blaster.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Laser-Blaster.mp3"; sourceTree = "<group>"; };
 		AC0AF96A20BA896F00D97D7E /* You-lose-sound-effect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "You-lose-sound-effect.mp3"; sourceTree = "<group>"; };
-		AC0AF97920BD8B3A00D97D7E /* Blast-Sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Blast-Sound.mp3"; path = "../../../Desktop/Blast-Sound.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +67,6 @@
 		6C4968DC20BD885F007EA8C7 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
-				AC0AF96620B849B400D97D7E /* Blast-Sound.mp3 */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -96,7 +93,6 @@
 			children = (
 				6C53AAB720B5B6B500E6FCF1 /* AppDelegate.swift */,
 				6C53AABB20B5B6B500E6FCF1 /* Actions.sks */,
-				AC0AF97920BD8B3A00D97D7E /* Blast-Sound.mp3 */,
 				6C4968D820B84D79007EA8C7 /* coinScene.sks */,
 				6C4968DA20B84D8D007EA8C7 /* coinScene.swift */,
 				6C53AAB920B5B6B500E6FCF1 /* GameScene.sks */,
@@ -118,13 +114,6 @@
 				6C53AAC920B5B6B700E6FCF1 /* Info.plist */,
 			);
 			path = spaceGame3;
-			sourceTree = "<group>";
-		};
-		AC0AF97820BD8A5F00D97D7E /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,7 +182,6 @@
 				AC0AF96520B70EC400D97D7E /* MenuScene.sks in Resources */,
 				6C53AAC520B5B6B700E6FCF1 /* Assets.xcassets in Resources */,
 				6C53AAC820B5B6B700E6FCF1 /* LaunchScreen.storyboard in Resources */,
-				AC0AF97A20BD8B3A00D97D7E /* Blast-Sound.mp3 in Resources */,
 				6C53AAD620B5B7E200E6FCF1 /* StarField.sks in Resources */,
 				6C4968D920B84D79007EA8C7 /* coinScene.sks in Resources */,
 				6C53AAD820B5B80D00E6FCF1 /* explosion.sks in Resources */,

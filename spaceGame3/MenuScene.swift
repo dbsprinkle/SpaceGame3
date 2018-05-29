@@ -33,6 +33,7 @@ class MenuScene: SKScene {
         
         difficultyLabelNode = self.childNode(withName: "difficultyLabel") as! SKLabelNode
         
+        rocket1Node = self.childNode(withName: "rocket1") as! SKSpriteNode
         
         let userDefaults = UserDefaults.standard
         if userDefaults.bool(forKey: "hard") {
@@ -72,7 +73,9 @@ class MenuScene: SKScene {
         let rocketNode = SKSpriteNode(imageNamed: "smallRocketNeg")
         rocketNode.position = rocket1Node.position
         self.addChild(rocketNode)
+        var differentRocket = true 
     }
+    
     
     func changeDifficulty() {
         let userDefaults = UserDefaults.standard
