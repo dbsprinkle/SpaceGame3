@@ -30,7 +30,6 @@ class MenuScene: SKScene {
         //place it behind everything we will add
         starField.zPosition = -1
         newGameButtonNode = self.childNode(withName: "newGameButton") as! SKSpriteNode
-//        difficultyButtonNode = self.childNode(withName: "difficultyButton") as! SKSpriteNode
         
         difficultyLabelNode = self.childNode(withName: "difficultyLabel") as! SKLabelNode
         
@@ -49,7 +48,7 @@ class MenuScene: SKScene {
         if let location = touch?.location(in: self){
             let nodesArray = self.nodes(at: location)
             if nodesArray.first == newGameButtonNode {
-                self.rocketBlastoff()
+                //self.rocketBlastoff()
                 self.run(SKAction.wait(forDuration: 1)){
                     let transition = SKTransition.flipVertical(withDuration: 0.5)
                     if let gameScene = SKScene(fileNamed: "GameScene"){
@@ -80,9 +79,11 @@ class MenuScene: SKScene {
         if difficultyLabelNode.text == "Easy"{
             difficultyLabelNode.text = "Hard"
             userDefaults.set(true, forKey: "hard")
+            userDefaults.set(false, forKey: "easy")
         } else {
             difficultyLabelNode.text = "Easy"
             userDefaults.set(true, forKey: "easy")
+            userDefaults.set(false, forKey: "hard")
         }
         
         userDefaults.synchronize()
@@ -102,5 +103,6 @@ class MenuScene: SKScene {
         actionArray.append(SKAction.removeFromParent())
         rocket1Node.run(SKAction.sequence(actionArray))
         blastoff.run(SKAction.sequence(actionArray))
+        starField.isPaused = false
     }
 }
