@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/destineesprinkle/Documents/MayX_2018/spaceGame3/spaceGame3/Blast-Sound.mp3">
-   </FileRef>
-   <FileRef
       location = "self:">
    </FileRef>
 </Workspace>

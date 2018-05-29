@@ -21,6 +21,8 @@
 		6C53AAD420B5B70900E6FCF1 /* RestartScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6C53AAD320B5B70900E6FCF1 /* RestartScene.sks */; };
 		6C53AAD620B5B7E200E6FCF1 /* StarField.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6C53AAD520B5B7E200E6FCF1 /* StarField.sks */; };
 		6C53AAD820B5B80D00E6FCF1 /* explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6C53AAD720B5B80D00E6FCF1 /* explosion.sks */; };
+		6C7AF85920BDD69900001BAF /* howToPlayScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6C7AF85820BDD69900001BAF /* howToPlayScene.sks */; };
+		6C7AF85B20BDD6C000001BAF /* howToPlayScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7AF85A20BDD6C000001BAF /* howToPlayScene.swift */; };
 		AC0AF96320B70EC400D97D7E /* blastoff.sks in Resources */ = {isa = PBXBuildFile; fileRef = AC0AF96020B70EC300D97D7E /* blastoff.sks */; };
 		AC0AF96420B70EC400D97D7E /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AF96120B70EC400D97D7E /* MenuScene.swift */; };
 		AC0AF96520B70EC400D97D7E /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = AC0AF96220B70EC400D97D7E /* MenuScene.sks */; };
@@ -46,6 +48,8 @@
 		6C53AAD320B5B70900E6FCF1 /* RestartScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RestartScene.sks; sourceTree = "<group>"; };
 		6C53AAD520B5B7E200E6FCF1 /* StarField.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StarField.sks; sourceTree = "<group>"; };
 		6C53AAD720B5B80D00E6FCF1 /* explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = explosion.sks; sourceTree = "<group>"; };
+		6C7AF85820BDD69900001BAF /* howToPlayScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = howToPlayScene.sks; sourceTree = "<group>"; };
+		6C7AF85A20BDD6C000001BAF /* howToPlayScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = howToPlayScene.swift; sourceTree = "<group>"; };
 		AC0AF96020B70EC300D97D7E /* blastoff.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = blastoff.sks; sourceTree = "<group>"; };
 		AC0AF96120B70EC400D97D7E /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
 		AC0AF96220B70EC400D97D7E /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
@@ -101,6 +105,8 @@
 				6C53AACF20B5B6E500E6FCF1 /* RestartScene.swift */,
 				AC0AF96220B70EC400D97D7E /* MenuScene.sks */,
 				AC0AF96120B70EC400D97D7E /* MenuScene.swift */,
+				6C7AF85820BDD69900001BAF /* howToPlayScene.sks */,
+				6C7AF85A20BDD6C000001BAF /* howToPlayScene.swift */,
 				6C53AABF20B5B6B500E6FCF1 /* GameViewController.swift */,
 				6C53AAD720B5B80D00E6FCF1 /* explosion.sks */,
 				6C53AAD520B5B7E200E6FCF1 /* StarField.sks */,
@@ -186,6 +192,7 @@
 				6C4968D920B84D79007EA8C7 /* coinScene.sks in Resources */,
 				6C53AAD820B5B80D00E6FCF1 /* explosion.sks in Resources */,
 				6C53AAD420B5B70900E6FCF1 /* RestartScene.sks in Resources */,
+				6C7AF85920BDD69900001BAF /* howToPlayScene.sks in Resources */,
 				6C53AABC20B5B6B500E6FCF1 /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -198,6 +205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C53AAD020B5B6E500E6FCF1 /* RestartScene.swift in Sources */,
+				6C7AF85B20BDD6C000001BAF /* howToPlayScene.swift in Sources */,
 				6C53AABE20B5B6B500E6FCF1 /* GameScene.swift in Sources */,
 				AC0AF96420B70EC400D97D7E /* MenuScene.swift in Sources */,
 				6C4968DB20B84D8D007EA8C7 /* coinScene.swift in Sources */,
