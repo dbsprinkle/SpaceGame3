@@ -104,6 +104,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         var timeInterval = 0.75
         if UserDefaults.standard.bool(forKey: "hard") {
             timeInterval = 0.3
+        } else if UserDefaults.standard.bool(forKey: "easy") {
+            timeInterval = 0.75
         }
         
         //add an asteroid after time interval(change this to make the game more difficult)
