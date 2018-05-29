@@ -21,6 +21,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             scoreLabel.text = "Score: \(score)"
         }
     }
+    var highScoreLabel:SKLabelNode!
+    var highScore = UserDefaults().integer(forKey: "HIGHSCORE") {
+        didSet{
+            highScoreLabel.text = "High Score: \(highScore)"
+        }
+    }
     
     var obstacleTimer:Timer!
     
@@ -81,6 +87,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         scoreLabel.fontColor = UIColor.white
         score = 0
         self.addChild(scoreLabel)
+        highScoreLabel = SKLabelNode(text: "Score: \(highScore)")
+        highScoreLabel.position = CGPoint(x: -300, y: 550)
+        highScoreLabel.fontName = "PingFangSC-Light"
+        highScoreLabel.fontSize = 32
+        highScoreLabel.fontColor = UIColor.white
+        self.addChild(highScoreLabel)
         
         var timeInterval = 0.75
         if UserDefaults.standard.bool(forKey: "hard") {
@@ -233,10 +245,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
         self.run(SKAction.wait(forDuration: 1)){
             explosion.removeFromParent()
-    }
+        }
         score += 1
+        if score > UserDefaults().integer(forKey: "HIGHSCORE") {
+            saveHighScore()
+        }
     }
     
+    func saveHighScore() {
+        UserDefaults().set(score, forKey: "HIGHSCORE")
+        
+    }
     
     //moves the rocket using the accelerator data
     override func didSimulatePhysics() {
