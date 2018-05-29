@@ -20,6 +20,8 @@ class MenuScene: SKScene {
     
     override func didMove(to view: SKView) {
         
+        rocket1Node = self.childNode(withName: "rocket1") as! SKSpriteNode
+        
         starField = SKEmitterNode(fileNamed: "StarField")
         starField.position = CGPoint(x: 0, y: 1472)
         //advance simulation so the whole screen is covered with stars when the game starts
@@ -93,7 +95,6 @@ class MenuScene: SKScene {
     }
     
     func rocketBlastoff() {
-        rocket1Node = self.childNode(withName: "rocket1") as! SKSpriteNode
         rocket1Node.physicsBody = SKPhysicsBody(rectangleOf: rocket1Node.size)
         rocket1Node.physicsBody?.isDynamic = true
         blastoff = SKEmitterNode(fileNamed: "blastoff")

@@ -15,12 +15,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     let rocket = SKSpriteNode(imageNamed: "smallRocket.png")
     var starField:SKEmitterNode!
     var scoreLabel:SKLabelNode!
+    //creates and updates coin amount
+    var coinLabel:SKLabelNode!
+    var coins = UserDefaults().integer(forKey: "COINS") {
+        didSet{
+            coinLabel.text = "Coins: \(coins)"
+        }
+    }
     //creates and updates score label
     var score:Int = 0 {
         didSet{
             scoreLabel.text = "Score: \(score)"
         }
     }
+    // creates and updates high score label
     var highScoreLabel:SKLabelNode!
     var highScore = UserDefaults().integer(forKey: "HIGHSCORE") {
         didSet{
@@ -75,7 +83,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         rocket.physicsBody?.collisionBitMask = 0
         rocket.physicsBody?.usesPreciseCollisionDetection = true
     
-        let range = SKRange(lowerLimit: -340, upperLimit: 340)
+        let range = SKRange(lowerLimit: -330, upperLimit: 330)
         let range2 = SKRange(lowerLimit: -650, upperLimit: 650)
         
         let lockToCenter = SKConstraint.positionX(range, y: range2)
@@ -85,6 +93,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         //no gravity
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         physicsWorld.contactDelegate = self
+        
+        coinLabel = SKLabelNode(text: "Coins: \(coins)")
+        
         
         //create and add label
         scoreLabel = SKLabelNode(text: "Score: 0")
@@ -116,7 +127,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             if let accelerometerData = data{
                 let accelerometer = accelerometerData.acceleration
                 self.xAcceleration = CGFloat(accelerometer.x * 0.75) + self.xAcceleration * 0.25
-                //self.yAccerleration = CGFloat(accelerometer.y * 0.75) + self.xAcceleration * 0.25
+//                self.yAccerleration = CGFloat(accelerometer.y * 0.75) + self.xAcceleration * 0.25
             }
         }
     }
@@ -283,11 +294,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         }else if rocket.position.x > self.size.width + 20{
             rocket.position = CGPoint(x: -20, y: rocket.position.y)
         }
-        /*if rocket.position.y < -500{
-            rocket.position = CGPoint(x: rocket.position.x, y: self.size.height + 20)
-        }else if rocket.position.y > self.size.height + 20{
-            rocket.position = CGPoint(x: rocket.position.x, y: -20)
-    }*/
+//        if rocket.position.y < -500{
+//            rocket.position = CGPoint(x: rocket.position.x, y: self.size.height + 20)
+//        }else if rocket.position.y > self.size.height + 20{
+//            rocket.position = CGPoint(x: rocket.position.x, y: -20)
+//        }
     }
     
     override func update(_ currentTime: TimeInterval) {
