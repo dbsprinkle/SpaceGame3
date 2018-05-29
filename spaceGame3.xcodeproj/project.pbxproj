@@ -32,6 +32,7 @@
 /* Begin PBXFileReference section */
 		6C4968D820B84D79007EA8C7 /* coinScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = coinScene.sks; sourceTree = "<group>"; };
 		6C4968DA20B84D8D007EA8C7 /* coinScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = coinScene.swift; sourceTree = "<group>"; };
+		6C4968DF20BD8DE2007EA8C7 /* Blast-Sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Blast-Sound.mp3"; path = "/Users/destineesprinkle/Documents/MayX_2018/spaceGame3/spaceGame3/Blast-Sound.mp3"; sourceTree = "<absolute>"; };
 		6C53AAB420B5B6B500E6FCF1 /* spaceGame3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = spaceGame3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C53AAB720B5B6B500E6FCF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6C53AAB920B5B6B500E6FCF1 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -65,11 +66,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6C4968DC20BD885F007EA8C7 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				AC0AF96620B849B400D97D7E /* Blast-Sound.mp3 */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		6C53AAAB20B5B6B500E6FCF1 = {
 			isa = PBXGroup;
 			children = (
 				6C53AAB620B5B6B500E6FCF1 /* spaceGame3 */,
 				6C53AAB520B5B6B500E6FCF1 /* Products */,
+				6C4968DC20BD885F007EA8C7 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -90,17 +100,18 @@
 				6C4968DA20B84D8D007EA8C7 /* coinScene.swift */,
 				6C53AAB920B5B6B500E6FCF1 /* GameScene.sks */,
 				6C53AABD20B5B6B500E6FCF1 /* GameScene.swift */,
-				AC0AF96820B8528700D97D7E /* Laser-Blaster.mp3 */,
 				6C53AAD320B5B70900E6FCF1 /* RestartScene.sks */,
 				6C53AACF20B5B6E500E6FCF1 /* RestartScene.swift */,
+				AC0AF96220B70EC400D97D7E /* MenuScene.sks */,
+				AC0AF96120B70EC400D97D7E /* MenuScene.swift */,
 				6C53AABF20B5B6B500E6FCF1 /* GameViewController.swift */,
 				6C53AAD720B5B80D00E6FCF1 /* explosion.sks */,
 				6C53AAD520B5B7E200E6FCF1 /* StarField.sks */,
 				AC0AF96020B70EC300D97D7E /* blastoff.sks */,
-				AC0AF96220B70EC400D97D7E /* MenuScene.sks */,
-				AC0AF96120B70EC400D97D7E /* MenuScene.swift */,
-				6C53AAC120B5B6B500E6FCF1 /* Main.storyboard */,
 				AC0AF96A20BA896F00D97D7E /* You-lose-sound-effect.mp3 */,
+				AC0AF96820B8528700D97D7E /* Laser-Blaster.mp3 */,
+				6C4968DF20BD8DE2007EA8C7 /* Blast-Sound.mp3 */,
+				6C53AAC120B5B6B500E6FCF1 /* Main.storyboard */,
 				6C53AAC420B5B6B700E6FCF1 /* Assets.xcassets */,
 				6C53AAC620B5B6B700E6FCF1 /* LaunchScreen.storyboard */,
 				6C53AAC920B5B6B700E6FCF1 /* Info.plist */,

@@ -186,7 +186,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         explosion.position = rocketNode.position
         self.addChild(explosion)
         
-        //self.run(SKAction.playSoundFileNamed("Blast-Sound.mp3", waitForCompletion: false))
+     
         
         obstacleNode.removeFromParent()
         rocketNode.removeFromParent()
@@ -248,8 +248,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         explosion.position = obstacleNode.position
         self.addChild(explosion)
         
-        //self.run(SKAction.playSoundFileNamed("Blast_Sound.mp3", waitForCompletion: false))
-        
+               
         obstacleNode.removeFromParent()
         laserNode.removeFromParent()
         
