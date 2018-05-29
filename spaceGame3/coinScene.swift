@@ -61,6 +61,13 @@ class coinScene: SKScene, SKPhysicsContactDelegate {
         rocket.physicsBody?.collisionBitMask = 0
         rocket.physicsBody?.usesPreciseCollisionDetection = true
         
+        let range = SKRange(lowerLimit: -330, upperLimit: 330)
+        let range2 = SKRange(lowerLimit: -650, upperLimit: 650)
+        
+        let lockToCenter = SKConstraint.positionX(range, y: range2)
+        
+        rocket.constraints = [ lockToCenter ]
+        
         //no gravity
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         physicsWorld.contactDelegate = self
