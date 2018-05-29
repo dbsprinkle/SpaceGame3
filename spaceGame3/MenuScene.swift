@@ -49,12 +49,15 @@ class MenuScene: SKScene {
         if let location = touch?.location(in: self){
             let nodesArray = self.nodes(at: location)
             if nodesArray.first == newGameButtonNode {
-                let transition = SKTransition.flipVertical(withDuration: 0.5)
-                if let gameScene = SKScene(fileNamed: "GameScene"){
-                    gameScene.scaleMode = .aspectFill
-                    self.view?.presentScene(gameScene, transition: transition)
+                self.rocketBlastoff()
+                self.run(SKAction.wait(forDuration: 1)){
+                    let transition = SKTransition.flipVertical(withDuration: 0.5)
+                    if let gameScene = SKScene(fileNamed: "GameScene"){
+                        gameScene.scaleMode = .aspectFill
+                        self.view?.presentScene(gameScene, transition: transition)
+                    }
                 }
-                rocketBlastoff()
+                
                 
                 print("New Game")
             } else if nodesArray.first?.name == "difficultyButton" {
@@ -81,12 +84,12 @@ class MenuScene: SKScene {
         rocket1Node.physicsBody = SKPhysicsBody(rectangleOf: rocket1Node.size)
         rocket1Node.physicsBody?.isDynamic = true
         blastoff = SKEmitterNode(fileNamed: "blastoff")
-        blastoff.position = rocket1Node.position
+        blastoff.position.y = rocket1Node.position.y - 10
         self.addChild(blastoff)
         blastoff.physicsBody = SKPhysicsBody(rectangleOf: rocket1Node.size)
         blastoff.physicsBody?.isDynamic = true
         var actionArray = [SKAction]()
-        actionArray.append(SKAction.move(to: CGPoint(x: rocket1Node.position.x, y: self.frame.size.height + 10), duration: 0.3))
+        actionArray.append(SKAction.move(to: CGPoint(x: rocket1Node.position.x, y: self.frame.size.height + 10), duration: 1))
         actionArray.append(SKAction.removeFromParent())
         rocket1Node.run(SKAction.sequence(actionArray))
         blastoff.run(SKAction.sequence(actionArray))
