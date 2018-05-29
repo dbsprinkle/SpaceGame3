@@ -151,6 +151,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
         self.addChild(obstacle)
         
+        //moves the obstacle down and off the screen
         var actionArray = [SKAction]()
         actionArray.append(SKAction.move(to:CGPoint(x: position, y:-750), duration: 6))
         actionArray.append(SKAction.removeFromParent())
@@ -181,13 +182,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         }
     }
     
-    //removes the rocket and asteroid if the collided and shows an explosion for 2 seconds
+    //removes the rocket and asteroid if the collided and shows an explosion a certian amount of time
     func rocketCrashedIntoObstacle(obstacleNode:SKSpriteNode, rocketNode:SKSpriteNode){
         let explosion = SKEmitterNode(fileNamed: "explosion")!
         explosion.position = rocketNode.position
         self.addChild(explosion)
         
-        self.run(SKAction.playSoundFileNamed("Blast-Sound.mp3", waitForCompletion: true))
+        //self.run(SKAction.playSoundFileNamed("Blast-Sound.mp3", waitForCompletion: false))
         
         obstacleNode.removeFromParent()
         rocketNode.removeFromParent()
@@ -214,7 +215,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     }
     
     
-   
+   //laser animation from rocket
     func fireLaser(){
         let laser = SKSpriteNode(imageNamed: "laser")
         laser.position = rocket.position
@@ -230,6 +231,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         self.addChild(laser)
         self.run(SKAction.playSoundFileNamed("Laser-Blaster.mp3", waitForCompletion: false))
         
+        //moves the laser up a off the screen
         var actionArray = [SKAction]()
         actionArray.append(SKAction.move(to: CGPoint(x: rocket.position.x, y: self.frame.size.height + 10), duration: 0.3))
         actionArray.append(SKAction.removeFromParent())
@@ -237,17 +239,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         laser.run(SKAction.sequence(actionArray))
         
     }
-    
+    //fires laser from rocket when screen is tapped
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         fireLaser()
     }
  
-    
+    //removes the obstacle the laser hit with explosion
     func laserHitObstacle(obstacleNode:SKSpriteNode, laserNode:SKSpriteNode){
         let explosion = SKEmitterNode(fileNamed: "explosion")!
         explosion.position = obstacleNode.position
         self.addChild(explosion)
-        self.run(SKAction.playSoundFileNamed("Blast-Sound.mp3", waitForCompletion: false))
+        
+        //self.run(SKAction.playSoundFileNamed("Blast_Sound.mp3", waitForCompletion: false))
         
         obstacleNode.removeFromParent()
         laserNode.removeFromParent()
@@ -256,8 +259,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             explosion.removeFromParent()
         }
         score += 1
-        if score > UserDefaults().integer(forKey: "HIGHSCORE") {
-            saveHighScore()
+        //transitions to coin level once a certian score is reached
+        if score > 35{
+            let transition = SKTransition.fade(withDuration: 0.5)
+            if let scene = SKScene(fileNamed: "coinScene") {
+                // Set the scale mode to scale to fit the window
+                scene.scaleMode = .aspectFill
+                self.view?.presentScene(scene, transition: transition)
+            }
         }
     }
     
@@ -269,17 +278,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     //moves the rocket using the accelerator data
     override func didSimulatePhysics() {
         rocket.position.x += xAcceleration * 50
-        rocket.position.y += yAccerleration * 50
+       // rocket.position.y += yAccerleration * 50
         if rocket.position.x < -500 {
             rocket.position = CGPoint(x: self.size.width + 20, y: rocket.position.y)
         }else if rocket.position.x > self.size.width + 20{
             rocket.position = CGPoint(x: -20, y: rocket.position.y)
         }
-        if rocket.position.y < -650{
+        /*if rocket.position.y < -500{
             rocket.position = CGPoint(x: rocket.position.x, y: self.size.height + 20)
         }else if rocket.position.y > self.size.height + 20{
             rocket.position = CGPoint(x: rocket.position.x, y: -20)
-    }
+    }*/
     }
     
     override func update(_ currentTime: TimeInterval) {
