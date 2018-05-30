@@ -18,6 +18,8 @@ class MenuScene: SKScene {
     var starField:SKEmitterNode!
     var blastoff:SKEmitterNode!
     var faqButtonNode:SKSpriteNode!
+    var popUp:SKSpriteNode!
+    var negRocket = false
     
     
     override func didMove(to view: SKView) {
@@ -39,6 +41,7 @@ class MenuScene: SKScene {
         difficultyLabelNode = self.childNode(withName: "difficultyLabel") as! SKLabelNode
         
         rocket1Node = self.childNode(withName: "rocket1") as! SKSpriteNode
+       
         
         
         let userDefaults = UserDefaults.standard
@@ -65,7 +68,7 @@ class MenuScene: SKScene {
                 
             } else if nodesArray.first?.name == "difficultyButton" {
                 changeDifficulty()
-            }else if nodesArray.first?.name == "rocket1" {
+            }else if nodesArray.first == rocket1Node {
                 changeRocket()
             }else if nodesArray.first?.name == "howToPlayButton"{
                 self.run(SKAction.wait(forDuration: 1)){
@@ -73,22 +76,48 @@ class MenuScene: SKScene {
                     if let scene = SKScene(fileNamed: "howToPlayScene"){
                         scene.scaleMode = .aspectFill
                         self.view?.presentScene(scene, transition: transition)
+                    }
+                    }
+            }else if nodesArray.first?.name == "OkayButton"{
+                popUp.isHidden = true
             }
         }
-    }
-}
 }
     
     func changeRocket(){
-        rocket1Node.removeFromParent()
-        let rocketNode = SKSpriteNode(imageNamed: "smallRocketNeg")
-        rocketNode.position = rocket1Node.position
-        self.addChild(rocketNode)
-        checkRocket()
-    }
+        //if the player doesn't have enough coins
+        let coinCheck = GameScene().checkCoins()
+        if coinCheck{
+        //switch which rocket is shown on screen and used in the game
+        let negRocketNode = SKSpriteNode(imageNamed: "smallRocketNeg-cutout")
+        let ogRocketNode = SKSpriteNode(imageNamed:"rocket-cutout-fire")
+        if negRocket == false{
+            rocket1Node.removeFromParent()
+            negRocketNode.position = rocket1Node.position
+            self.addChild(negRocketNode)
+            rocket1Node = negRocketNode
+            checkRocket()
+        }else if negRocket == true{
+            rocket1Node.removeFromParent()
+            ogRocketNode.position = rocket1Node.position
+            self.addChild(ogRocketNode)
+            rocket1Node = ogRocketNode
+            checkRocket()
+        }
+        }
+        else{
+            //tell them
+            popUp.isHidden = false
+        }
+}
     
     func checkRocket() -> Bool{
-        let negRocket = true
+        if negRocket == false{
+            negRocket = true
+        }else if negRocket == true{
+            negRocket = false
+        }
+        print(negRocket)
         return negRocket
     }
     

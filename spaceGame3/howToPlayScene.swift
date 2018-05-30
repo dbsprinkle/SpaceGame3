@@ -11,7 +11,7 @@ import SpriteKit
 class howToPlayScene: SKScene {
 
     var customBackgroundColor = UIColor(red: 0.000, green: 0.001, blue: 0.153, alpha: 1)
-    
+    //nodes for how to play screen
     var backStory:SKSpriteNode!
     var step1:SKSpriteNode!
     var step2:SKSpriteNode!
@@ -42,7 +42,7 @@ class howToPlayScene: SKScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
-  
+        //take user back to main menu
         if let location = touch?.location(in: self){
             let nodesArray = self.nodes(at: location)
             if nodesArray.first?.name == "backButton" {
