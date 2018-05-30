@@ -23,11 +23,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         }
     }
     //creates and updates score label
-    var score:Int = 0 {
-        didSet{
-            scoreLabel.text = "Score: \(score)"
-        }
-    }
+    var score = UserDefaults().integer(forKey: "SCORE")
     // creates and updates high score label
     var highScoreLabel:SKLabelNode!
     var highScore = UserDefaults().integer(forKey: "HIGHSCORE") {
@@ -35,6 +31,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             highScoreLabel.text = "High Score: \(highScore)"
         }
     }
+    
     
     var obstacleTimer:Timer!
     
@@ -54,6 +51,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     
     override func didMove(to view: SKView) {
+        if UserDefaults().bool(forKey: "VISITED") == false {
+            score = 0
+        }
+        
         let rocketCheck = MenuScene().checkRocket()
         if rocketCheck && coins > 150{
               rocket = SKSpriteNode(imageNamed: "smallRocketNeg.png")
@@ -107,14 +108,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         self.addChild(coinLabel)
         
         //create and add label
-        scoreLabel = SKLabelNode(text: "Score: 0")
+        scoreLabel = SKLabelNode(text: "Score: \(score)")
         scoreLabel.position = CGPoint(x: -300, y: 600)
         scoreLabel.fontName = "PingFangSC-Light"
         scoreLabel.fontSize = 32
         scoreLabel.fontColor = UIColor.white
-        score = 0
         self.addChild(scoreLabel)
-        highScoreLabel = SKLabelNode(text: "Score: \(highScore)")
+        highScoreLabel = SKLabelNode(text: "High Score: \(highScore)")
         highScoreLabel.position = CGPoint(x: -300, y: 550)
         highScoreLabel.fontName = "PingFangSC-Light"
         highScoreLabel.fontSize = 32
@@ -280,9 +280,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             explosion.removeFromParent()
         }
         score += 1
+        UserDefaults().set(score, forKey: "SCORE")
+        scoreLabel.text = "Score: \(score)"
         saveHighScore()
         //transitions to coin level once a certian score is reached
-        if score > 5{
+        if score % 5 == 0{
             let transition = SKTransition.fade(withDuration: 0.5)
             if let scene = SKScene(fileNamed: "coinScene") {
                 // Set the scale mode to scale to fit the window

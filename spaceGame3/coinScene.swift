@@ -30,7 +30,10 @@ class coinScene: SKScene, SKPhysicsContactDelegate {
     
     var customBackgroundColor = UIColor(red: 0.000, green: 0.001, blue: 0.153, alpha: 1)
     
+    var visited = UserDefaults().bool(forKey: "VISITED")
+    
     override func didMove(to view: SKView) {
+        UserDefaults().set(true, forKey: "VISITED")
         //create the star field as a SKEmitterNode  and give it a position
         starField = SKEmitterNode(fileNamed: "StarField")
         starField.position = CGPoint(x: 0, y: 1400)
