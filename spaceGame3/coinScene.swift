@@ -110,6 +110,7 @@ class coinScene: SKScene, SKPhysicsContactDelegate {
         
         self.addChild(coin)
         
+        
         var actionArray = [SKAction]()
         actionArray.append(SKAction.move(to:CGPoint(x: position, y:-750), duration: 6))
         actionArray.append(SKAction.removeFromParent())
@@ -137,6 +138,7 @@ class coinScene: SKScene, SKPhysicsContactDelegate {
     func gotCoin(coinNode:SKSpriteNode, rocketNode:SKSpriteNode){
         coinNode.removeFromParent()
         coins += 1
+        self.run(SKAction.playSoundFileNamed("coin.wav", waitForCompletion: false))
         }
     
     @objc func transitionsToGame() {

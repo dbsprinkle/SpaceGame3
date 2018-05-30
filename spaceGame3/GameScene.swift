@@ -277,7 +277,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         }
         score += 1
         //transitions to coin level once a certian score is reached
-        if score > 35{
+        if score > 5{
             let transition = SKTransition.fade(withDuration: 0.5)
             if let scene = SKScene(fileNamed: "coinScene") {
                 // Set the scale mode to scale to fit the window

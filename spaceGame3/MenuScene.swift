@@ -69,9 +69,17 @@ class MenuScene: SKScene {
                 changeDifficulty()
             }else if nodesArray.first?.name == "rocket1" {
                 changeRocket()
+            }else if nodesArray.first?.name == "howToPlayButton"{
+                self.run(SKAction.wait(forDuration: 1)){
+                    let transition = SKTransition.flipVertical(withDuration: 0.5)
+                    if let scene = SKScene(fileNamed: "howToPlayScene"){
+                        scene.scaleMode = .aspectFill
+                        self.view?.presentScene(scene, transition: transition)
             }
         }
     }
+}
+}
     
     func changeRocket(){
         rocket1Node.removeFromParent()
