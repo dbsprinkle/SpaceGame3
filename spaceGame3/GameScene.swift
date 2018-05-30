@@ -58,7 +58,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     override func didMove(to view: SKView) {
         //which rockcet should be used
         let rocketCheck = MenuScene().checkRocket()
-        if rocketCheck {
+        let coinsCheck = checkCoins()
+        print(rocketCheck)
+        if rocketCheck && coinsCheck {
               rocket = SKSpriteNode(imageNamed: "smallRocketNeg.png")
         }else{
               rocket = SKSpriteNode(imageNamed: "smallRocket.png")
@@ -118,8 +120,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         scoreLabel.fontColor = UIColor.white
         score = 0
         self.addChild(scoreLabel)
-        highScoreLabel = SKLabelNode(text: "Score: \(highScore)")
-        highScoreLabel.position = CGPoint(x: -300, y: 550)
+        highScoreLabel = SKLabelNode(text: "HighScore: \(highScore)")
+        highScoreLabel.position = CGPoint(x: -275, y: 550)
         highScoreLabel.fontName = "PingFangSC-Light"
         highScoreLabel.fontSize = 32
         highScoreLabel.fontColor = UIColor.white
@@ -310,6 +312,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         }else{
             enoughCoins = true
         }
+        print("coins \(coins)")
+        print(enoughCoins)
         return enoughCoins
     }
     

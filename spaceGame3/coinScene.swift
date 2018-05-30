@@ -38,7 +38,7 @@ class coinScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         //which rocket should it present
-        let rocketCheck = MenuScene().checkRocket()
+        let rocketCheck = GameScene().checkCoins()
         if rocketCheck {
             rocket = SKSpriteNode(imageNamed: "smallRocketNeg.png")
         }else{

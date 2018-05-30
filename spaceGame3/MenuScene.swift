@@ -90,10 +90,8 @@ class MenuScene: SKScene {
     func changeRocket(){
         //if the player doesn't have enough coins
         let coinCheck = GameScene().checkCoins()
-        //tell them
-        popUp.isHidden = false
         if coinCheck{
-        //switch which rocket is shown on screen and used in the gamee
+        //switch which rocket is shown on screen and used in the game
         let negRocketNode = SKSpriteNode(imageNamed: "smallRocketNeg-cutout")
         let ogRocketNode = SKSpriteNode(imageNamed:"rocket-cutout-fire")
         if negRocket == false{
@@ -109,7 +107,11 @@ class MenuScene: SKScene {
             rocket1Node = ogRocketNode
             checkRocket()
         }
-    }
+        }
+        else{
+            //tell them
+            popUp.isHidden = false
+        }
 }
     
     func checkRocket() -> Bool{
@@ -118,6 +120,7 @@ class MenuScene: SKScene {
         }else if negRocket == true{
             negRocket = false
         }
+        print(negRocket)
         return negRocket
     }
     
