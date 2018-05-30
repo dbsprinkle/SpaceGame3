@@ -12,6 +12,7 @@ import CoreMotion
 
 class GameScene: SKScene, SKPhysicsContactDelegate{
     
+    //nodes for the gamescene
     var rocket:SKSpriteNode!
     var starField:SKEmitterNode!
     var scoreLabel:SKLabelNode!
@@ -40,13 +41,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     var possibleObstacles = ["smallAsteroid", "alien2-cutout"]
     
+    //bit mask categories used for collison testing
     var rocketCategory:UInt32 = 0x1 << 2
     var obstacleCategory:UInt32 = 0x1 << 0
     var laserCategory:UInt32 = 0x1 << 1
     
     let motionManager = CMMotionManager()
     var xAcceleration:CGFloat = 0
-    var yAccerleration:CGFloat = 0
+    //var yAccerleration:CGFloat = 0
     
     var customBackgroundColor = UIColor(red: 0.000, green: 0.001, blue: 0.153, alpha: 1)
     
@@ -54,6 +56,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     
     override func didMove(to view: SKView) {
+        //which rockcet should be used
         let rocketCheck = MenuScene().checkRocket()
         if rocketCheck {
               rocket = SKSpriteNode(imageNamed: "smallRocketNeg.png")
@@ -88,6 +91,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         rocket.physicsBody?.collisionBitMask = 0
         rocket.physicsBody?.usesPreciseCollisionDetection = true
     
+        //screen constraints
         let range = SKRange(lowerLimit: -330, upperLimit: 330)
         let range2 = SKRange(lowerLimit: -650, upperLimit: 650)
         
@@ -117,6 +121,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         highScoreLabel.fontColor = UIColor.white
         self.addChild(highScoreLabel)
         
+        //save the difficulty of the game
         var timeInterval = 0.75
         if UserDefaults.standard.bool(forKey: "hard") {
             timeInterval = 0.3
@@ -153,9 +158,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     //add an asteroid to the screen at a random position and removes it when it goes off the bottom
     @objc func addObstacle(){
+        //shuffle the array and get the first object
         possibleObstacles = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: possibleObstacles) as! [String]
         let obstacle = SKSpriteNode(imageNamed: possibleObstacles[0])
-        
+        //make obstacle at random position
         let randomObstaclePostion = GKRandomDistribution(lowestValue: -400, highestValue: 400)
         let position = CGFloat(randomObstaclePostion.nextInt())
         obstacle.position = CGPoint(x: position, y: self.frame.size.height + obstacle.size.height)
@@ -286,12 +292,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             }
         }
     }
-    
+    //saves users highscore
     func saveHighScore() {
         UserDefaults().set(score, forKey: "HIGHSCORE")
         
     }
-    
+    //does the player have enough coins to buy a different rocket?
     func checkCoins() -> Bool{
         var enoughCoins:Bool
         if coins < 150{

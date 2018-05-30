@@ -12,15 +12,18 @@ import CoreMotion
 
 class coinScene: SKScene, SKPhysicsContactDelegate {
 
+    //nodes for the coin screen
     var rocket:SKSpriteNode!
     var starField:SKEmitterNode!
     var coinLabel:SKLabelNode!
+    
     //creates and updates score label
     var coins:Int = 0 {
         didSet{
             coinLabel.text = "Coins: \(coins)"
         }
     }
+    //bit mask categories to be used in collison testing
     var rocketCategory:UInt32 = 0x1 << 1
     var coinCategory:UInt32 = 0x1 << 0
     
@@ -34,6 +37,7 @@ class coinScene: SKScene, SKPhysicsContactDelegate {
     var customBackgroundColor = UIColor(red: 0.000, green: 0.001, blue: 0.153, alpha: 1)
     
     override func didMove(to view: SKView) {
+        //which rocket should it present
         let rocketCheck = MenuScene().checkRocket()
         if rocketCheck {
             rocket = SKSpriteNode(imageNamed: "smallRocketNeg.png")
@@ -67,6 +71,7 @@ class coinScene: SKScene, SKPhysicsContactDelegate {
         rocket.physicsBody?.collisionBitMask = 0
         rocket.physicsBody?.usesPreciseCollisionDetection = true
         
+        //screen constraints
         let range = SKRange(lowerLimit: -330, upperLimit: 330)
         let range2 = SKRange(lowerLimit: -650, upperLimit: 650)
         
@@ -88,8 +93,9 @@ class coinScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(coinLabel)
         
         
+        //times when the coins will appear on screen and how long the player will be in the coin level
         coinTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(addCoin), userInfo: nil, repeats: true)
-       sceneTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(transitionsToGame), userInfo: nil, repeats: false)
+        sceneTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(transitionsToGame), userInfo: nil, repeats: false)
             
         //gets the acceleration data(how fast you are moving the phone)
         motionManager.accelerometerUpdateInterval = 0.2
@@ -103,11 +109,13 @@ class coinScene: SKScene, SKPhysicsContactDelegate {
     }
     
     @objc func addCoin(){
+        //adds a coin at a random location on the screen
         let coin = SKSpriteNode(imageNamed: "goldCoin")
         let randomCoinPostion = GKRandomDistribution(lowestValue: -400, highestValue: 400)
         let position = CGFloat(randomCoinPostion.nextInt())
         coin.position = CGPoint(x: position, y: self.frame.size.height + coin.size.height)
         
+        //physics used for collison
         coin.physicsBody = SKPhysicsBody(circleOfRadius: coin.size.width / 2)
         coin.physicsBody?.isDynamic = true
         coin.physicsBody?.categoryBitMask = coinCategory
@@ -116,7 +124,7 @@ class coinScene: SKScene, SKPhysicsContactDelegate {
         
         self.addChild(coin)
         
-        
+        //move the coin down the screen and off the view
         var actionArray = [SKAction]()
         actionArray.append(SKAction.move(to:CGPoint(x: position, y:-750), duration: 6))
         actionArray.append(SKAction.removeFromParent())
@@ -128,6 +136,7 @@ class coinScene: SKScene, SKPhysicsContactDelegate {
         var firstBody:SKPhysicsBody
         var secondBody:SKPhysicsBody
         
+        //check to see if the rocket hit the coin
         if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask{
             firstBody = contact.bodyA
             secondBody = contact.bodyB
@@ -141,12 +150,14 @@ class coinScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    //remove coin from view when rocket hits it
     func gotCoin(coinNode:SKSpriteNode, rocketNode:SKSpriteNode){
         coinNode.removeFromParent()
         coins += 1
         self.run(SKAction.playSoundFileNamed("coin.wav", waitForCompletion: false))
         }
     
+    //transition back to the main game
     @objc func transitionsToGame() {
         let transition = SKTransition.fade(withDuration: 0.5)
         if let scene = SKScene(fileNamed: "GameScene") {
@@ -155,7 +166,8 @@ class coinScene: SKScene, SKPhysicsContactDelegate {
             self.view?.presentScene(scene, transition: transition)
         }
     }
-    
+    //moves rocket left and right and up and down
+    // up and down is really hard, don't reccommend
     override func didSimulatePhysics() {
         rocket.position.x += xAcceleration * 50
         // rocket.position.y += yAccerleration * 50
