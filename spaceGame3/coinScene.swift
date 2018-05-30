@@ -84,12 +84,11 @@ class coinScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.contactDelegate = self
         
         //create and add label
-        coinLabel = SKLabelNode(text: "Score: 0")
+        coinLabel = SKLabelNode(text: "Score: \(coins)")
         coinLabel.position = CGPoint(x: -300, y: 600)
         coinLabel.fontName = "PingFangSC-Light"
         coinLabel.fontSize = 32
         coinLabel.fontColor = UIColor.white
-        coins = 0
         self.addChild(coinLabel)
         
         
@@ -106,6 +105,7 @@ class coinScene: SKScene, SKPhysicsContactDelegate {
                // self.yAccerleration = CGFloat(accelerometer.y * 0.75) + self.xAcceleration * 0.25
             }
         }
+        
     }
     
     @objc func addCoin(){
@@ -154,8 +154,9 @@ class coinScene: SKScene, SKPhysicsContactDelegate {
     func gotCoin(coinNode:SKSpriteNode, rocketNode:SKSpriteNode){
         coinNode.removeFromParent()
         coins += 1
-        self.run(SKAction.playSoundFileNamed("coin.wav", waitForCompletion: false))
-        }
+        UserDefaults().set(coins, forKey: "COINS")
+        coinLabel.text = "Coins: \(coins)"
+    }
     
     //transition back to the main game
     @objc func transitionsToGame() {
