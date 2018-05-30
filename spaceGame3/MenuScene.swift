@@ -18,11 +18,13 @@ class MenuScene: SKScene {
     var starField:SKEmitterNode!
     var blastoff:SKEmitterNode!
     var faqButtonNode:SKSpriteNode!
+    var popUp:SKSpriteNode!
     var negRocket = false
     
     
     override func didMove(to view: SKView) {
-        
+        popUp = self.childNode(withName: "popUp") as! SKSpriteNode
+        popUp.isHidden = true
         rocket1Node = self.childNode(withName: "rocket1") as! SKSpriteNode
         
         starField = SKEmitterNode(fileNamed: "StarField")
@@ -56,7 +58,7 @@ class MenuScene: SKScene {
         if let location = touch?.location(in: self){
             let nodesArray = self.nodes(at: location)
             if nodesArray.first == newGameButtonNode {
-                //self.rocketBlastoff()
+                self.rocketBlastoff()
                 self.run(SKAction.wait(forDuration: 1)){
                     let transition = SKTransition.flipVertical(withDuration: 0.5)
                     if let gameScene = SKScene(fileNamed: "GameScene"){
@@ -77,13 +79,18 @@ class MenuScene: SKScene {
                     if let scene = SKScene(fileNamed: "howToPlayScene"){
                         scene.scaleMode = .aspectFill
                         self.view?.presentScene(scene, transition: transition)
+                    }
+                    }
+            }else if nodesArray.first?.name == "OkayButton"{
+                popUp.isHidden = true
             }
         }
-    }
-}
 }
     
     func changeRocket(){
+        let coinCheck = GameScene().checkCoins()
+        popUp.isHidden = false
+        if coinCheck{
         let negRocketNode = SKSpriteNode(imageNamed: "smallRocketNeg-cutout")
         let ogRocketNode = SKSpriteNode(imageNamed:"rocket-cutout-fire")
         if negRocket == false{
@@ -99,8 +106,8 @@ class MenuScene: SKScene {
             rocket1Node = ogRocketNode
             checkRocket()
         }
-       
     }
+}
     
     func checkRocket() -> Bool{
         if negRocket == false{
@@ -108,7 +115,6 @@ class MenuScene: SKScene {
         }else if negRocket == true{
             negRocket = false
         }
-        print(negRocket)
         return negRocket
     }
     

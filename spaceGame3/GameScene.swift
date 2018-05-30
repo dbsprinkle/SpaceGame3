@@ -292,6 +292,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
     }
     
+    func checkCoins() -> Bool{
+        var enoughCoins:Bool
+        if coins < 150{
+            enoughCoins = false
+        }else{
+            enoughCoins = true
+        }
+        return enoughCoins
+    }
+    
     //moves the rocket using the accelerator data
     override func didSimulatePhysics() {
         rocket.position.x += xAcceleration * 50

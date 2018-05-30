@@ -24,7 +24,7 @@
 		6C7AF85920BDD69900001BAF /* howToPlayScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 6C7AF85820BDD69900001BAF /* howToPlayScene.sks */; };
 		6C7AF85B20BDD6C000001BAF /* howToPlayScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C7AF85A20BDD6C000001BAF /* howToPlayScene.swift */; };
 		6C7CC17320BE181F00CE93B3 /* coin.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6C7CC17220BE181F00CE93B3 /* coin.wav */; };
-		6C7CC17420BE198700CE93B3 /* Blast-Sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6C4968DF20BD8DE2007EA8C7 /* Blast-Sound.mp3 */; };
+		6C7CC17520BE33C400CE93B3 /* Blast-Sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6C4968DF20BD8DE2007EA8C7 /* Blast-Sound.mp3 */; };
 		AC0AF96320B70EC400D97D7E /* blastoff.sks in Resources */ = {isa = PBXBuildFile; fileRef = AC0AF96020B70EC300D97D7E /* blastoff.sks */; };
 		AC0AF96420B70EC400D97D7E /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0AF96120B70EC400D97D7E /* MenuScene.swift */; };
 		AC0AF96520B70EC400D97D7E /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = AC0AF96220B70EC400D97D7E /* MenuScene.sks */; };
@@ -193,7 +193,7 @@
 				AC0AF96520B70EC400D97D7E /* MenuScene.sks in Resources */,
 				6C53AAC520B5B6B700E6FCF1 /* Assets.xcassets in Resources */,
 				6C53AAC820B5B6B700E6FCF1 /* LaunchScreen.storyboard in Resources */,
-				6C7CC17420BE198700CE93B3 /* Blast-Sound.mp3 in Resources */,
+				6C7CC17520BE33C400CE93B3 /* Blast-Sound.mp3 in Resources */,
 				6C53AAD620B5B7E200E6FCF1 /* StarField.sks in Resources */,
 				6C4968D920B84D79007EA8C7 /* coinScene.sks in Resources */,
 				6C53AAD820B5B80D00E6FCF1 /* explosion.sks in Resources */,
