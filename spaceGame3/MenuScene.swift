@@ -17,6 +17,8 @@ class MenuScene: SKScene {
     var rocket1Node:SKSpriteNode!
     var starField:SKEmitterNode!
     var blastoff:SKEmitterNode!
+    var faqButtonNode:SKSpriteNode!
+    
     
     override func didMove(to view: SKView) {
         
@@ -34,6 +36,8 @@ class MenuScene: SKScene {
         newGameButtonNode = self.childNode(withName: "newGameButton") as! SKSpriteNode
         
         difficultyLabelNode = self.childNode(withName: "difficultyLabel") as! SKLabelNode
+        
+        rocket1Node = self.childNode(withName: "rocket1") as! SKSpriteNode
         
         
         let userDefaults = UserDefaults.standard
@@ -65,15 +69,29 @@ class MenuScene: SKScene {
                 changeDifficulty()
             }else if nodesArray.first?.name == "rocket1" {
                 changeRocket()
+            }else if nodesArray.first?.name == "howToPlayButton"{
+                self.run(SKAction.wait(forDuration: 1)){
+                    let transition = SKTransition.flipVertical(withDuration: 0.5)
+                    if let scene = SKScene(fileNamed: "howToPlayScene"){
+                        scene.scaleMode = .aspectFill
+                        self.view?.presentScene(scene, transition: transition)
             }
         }
     }
+}
+}
     
     func changeRocket(){
         rocket1Node.removeFromParent()
         let rocketNode = SKSpriteNode(imageNamed: "smallRocketNeg")
         rocketNode.position = rocket1Node.position
         self.addChild(rocketNode)
+        checkRocket()
+    }
+    
+    func checkRocket() -> Bool{
+        let negRocket = true
+        return negRocket
     }
     
     func changeDifficulty() {

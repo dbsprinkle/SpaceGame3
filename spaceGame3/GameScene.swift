@@ -12,7 +12,7 @@ import CoreMotion
 
 class GameScene: SKScene, SKPhysicsContactDelegate{
     
-    let rocket = SKSpriteNode(imageNamed: "smallRocket.png")
+    var rocket:SKSpriteNode!
     var starField:SKEmitterNode!
     var scoreLabel:SKLabelNode!
     //creates and updates coin amount
@@ -53,9 +53,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     var livesArray:[SKSpriteNode]!
     
     
-    
-    
     override func didMove(to view: SKView) {
+        let rocketCheck = MenuScene().checkRocket()
+        if rocketCheck && coins > 150{
+              rocket = SKSpriteNode(imageNamed: "smallRocketNeg.png")
+        }else{
+              rocket = SKSpriteNode(imageNamed: "smallRocket.png")
+            
+        }
         addLives()
         //create the star field as a SKEmitterNode  and give it a position
         starField = SKEmitterNode(fileNamed: "StarField")
@@ -135,6 +140,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             }
         }
     }
+
     
     func addLives() {
         livesArray = [SKSpriteNode]()
@@ -203,7 +209,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         explosion.position = rocketNode.position
         self.addChild(explosion)
         
-        //self.run(SKAction.playSoundFileNamed("Blast-Sound.mp3", waitForCompletion: false))
+        self.run(SKAction.playSoundFileNamed("Blast-Sound.mp3", waitForCompletion: false))
         
         obstacleNode.removeFromParent()
         rocketNode.removeFromParent()
@@ -265,8 +271,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         explosion.position = obstacleNode.position
         self.addChild(explosion)
         
-        //self.run(SKAction.playSoundFileNamed("Blast_Sound.mp3", waitForCompletion: false))
-        
+         self.run(SKAction.playSoundFileNamed("Blast-Sound.mp3", waitForCompletion: false))
+               
         obstacleNode.removeFromParent()
         laserNode.removeFromParent()
         
@@ -276,7 +282,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         score += 1
         saveHighScore()
         //transitions to coin level once a certian score is reached
-        if score > 35{
+        if score > 5{
             let transition = SKTransition.fade(withDuration: 0.5)
             if let scene = SKScene(fileNamed: "coinScene") {
                 // Set the scale mode to scale to fit the window
