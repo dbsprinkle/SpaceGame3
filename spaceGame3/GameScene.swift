@@ -55,7 +55,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     override func didMove(to view: SKView) {
         let rocketCheck = MenuScene().checkRocket()
-        if rocketCheck && coins > 150{
+        if rocketCheck {
               rocket = SKSpriteNode(imageNamed: "smallRocketNeg.png")
         }else{
               rocket = SKSpriteNode(imageNamed: "smallRocket.png")

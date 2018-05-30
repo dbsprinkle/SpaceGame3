@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "smallRocketNeg.png",
+      "filename" : "smallRocketNeg-cutout.png",
       "scale" : "1x"
     },
     {

@@ -12,8 +12,7 @@ import CoreMotion
 
 class coinScene: SKScene, SKPhysicsContactDelegate {
 
-    let rocket = SKSpriteNode(imageNamed: "smallRocket.png")
-   
+    var rocket:SKSpriteNode!
     var starField:SKEmitterNode!
     var coinLabel:SKLabelNode!
     //creates and updates score label
@@ -35,6 +34,13 @@ class coinScene: SKScene, SKPhysicsContactDelegate {
     var customBackgroundColor = UIColor(red: 0.000, green: 0.001, blue: 0.153, alpha: 1)
     
     override func didMove(to view: SKView) {
+        let rocketCheck = MenuScene().checkRocket()
+        if rocketCheck {
+            rocket = SKSpriteNode(imageNamed: "smallRocketNeg.png")
+        }else{
+            rocket = SKSpriteNode(imageNamed: "smallRocket.png")
+            
+        }
         //create the star field as a SKEmitterNode  and give it a position
         starField = SKEmitterNode(fileNamed: "StarField")
         starField.position = CGPoint(x: 0, y: 1400)
