@@ -18,21 +18,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     var scoreLabel:SKLabelNode!
     //creates and updates coin amount
     var coinLabel:SKLabelNode!
-    var coins = UserDefaults().integer(forKey: "COINS") {
-        didSet{
-            coinLabel.text = "Coins: \(coins)"
-        }
-    }
+    var coins = UserDefaults().integer(forKey: "COINS")
     //creates and updates score label
     var score = UserDefaults().integer(forKey: "SCORE")
     // creates and updates high score label
     var highScoreLabel:SKLabelNode!
-    var highScore = UserDefaults().integer(forKey: "HIGHSCORE") {
-        didSet{
-            highScoreLabel.text = "High Score: \(highScore)"
-        }
-    }
+    var highScore = UserDefaults().integer(forKey: "HIGHSCORE")
+    var died = false
     
+    var lives = UserDefaults().integer(forKey: "LIVES")
     
     var obstacleTimer:Timer!
     
@@ -56,6 +50,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         if UserDefaults().bool(forKey: "VISITED") == false {
             score = 0
         }
+        
         
         let rocketCheck = MenuScene().checkRocket()
         let coinsCheck = checkCoins()
@@ -105,6 +100,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         physicsWorld.contactDelegate = self
         
+        //adds the coin label
         coinLabel = SKLabelNode(text: "Coins: \(coins)")
         coinLabel.position = CGPoint(x: -300, y: 500)
         coinLabel.fontName = "PingFangSC-Light"
@@ -119,6 +115,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         scoreLabel.fontSize = 32
         scoreLabel.fontColor = UIColor.white
         self.addChild(scoreLabel)
+        
+        //adds the high score label
         highScoreLabel = SKLabelNode(text: "High Score: \(highScore)")
         highScoreLabel.position = CGPoint(x: -300, y: 550)
         highScoreLabel.fontName = "PingFangSC-Light"
@@ -151,7 +149,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     func addLives() {
         livesArray = [SKSpriteNode]()
         var x = 200
-        for _ in 1...3 {
+        for _ in 1...lives {
             let liveNode = SKSpriteNode(imageNamed: "rocket-cutout-fire-1")
             livesArray.append(liveNode)
             liveNode.position = CGPoint(x: x, y: 600)
@@ -212,6 +210,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     //removes the rocket and asteroid if the collided and shows an explosion a certian amount of time
     func rocketCrashedIntoObstacle(obstacleNode:SKSpriteNode, rocketNode:SKSpriteNode){
+        died = true
         let explosion = SKEmitterNode(fileNamed: "explosion")!
         explosion.position = rocketNode.position
         self.addChild(explosion)
@@ -225,6 +224,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             explosion.removeFromParent()
         }
         if self.livesArray.count > 0 {
+            UserDefaults().set(lives-1, forKey: "LIVES")
             let liveNode = self.livesArray.first
             liveNode!.removeFromParent()
             self.livesArray.removeFirst()
@@ -269,7 +269,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     }
     //fires laser from rocket when screen is tapped
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        fireLaser()
+        if died == false {
+           fireLaser()
+        } else {
+            self.run(SKAction.wait(forDuration: 0.3)){
+                self.fireLaser()
+                self.died = false
+            }
+        }
+        
     }
  
     //removes the obstacle the laser hit with explosion
@@ -291,7 +299,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         scoreLabel.text = "Score: \(score)"
         saveHighScore()
         //transitions to coin level once a certian score is reached
-        if score % 5 == 0{
+        if score % 20 == 0{
             let transition = SKTransition.fade(withDuration: 0.5)
             if let scene = SKScene(fileNamed: "coinScene") {
                 // Set the scale mode to scale to fit the window
@@ -303,6 +311,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     //saves users highscore
     func saveHighScore() {
         UserDefaults().set(score, forKey: "HIGHSCORE")
+        highScoreLabel.text = "High Score: \(score)"
         
     }
     //does the player have enough coins to buy a different rocket?

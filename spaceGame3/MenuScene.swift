@@ -9,8 +9,7 @@
 import SpriteKit
 
 class MenuScene: SKScene {
-
-//    var starfield:SKEmitterNode!
+    //creates nodes for scene
     var newGameButtonNode:SKSpriteNode!
     var difficultyButtonNode:SKSpriteNode!
     var difficultyLabelNode:SKLabelNode!
@@ -19,13 +18,14 @@ class MenuScene: SKScene {
     var blastoff:SKEmitterNode!
     var faqButtonNode:SKSpriteNode!
     var popUp:SKSpriteNode!
+    //variable for rocket change
     var negRocket = false
     
     
     override func didMove(to view: SKView) {
+        //variable to ensure that the score starts over
         UserDefaults().set(false, forKey: "VISITED")
-        
-        rocket1Node = self.childNode(withName: "rocket1") as! SKSpriteNode
+        UserDefaults().set(3, forKey: "LIVES")
         
         starField = SKEmitterNode(fileNamed: "StarField")
         starField.position = CGPoint(x: 0, y: 1472)
@@ -36,14 +36,17 @@ class MenuScene: SKScene {
         self.addChild(starField)
         //place it behind everything we will add
         starField.zPosition = -1
+        
         newGameButtonNode = self.childNode(withName: "newGameButton") as! SKSpriteNode
         
         difficultyLabelNode = self.childNode(withName: "difficultyLabel") as! SKLabelNode
         
         rocket1Node = self.childNode(withName: "rocket1") as! SKSpriteNode
+        
+        popUp = self.childNode(withName: "popUp") as! SKSpriteNode
        
         
-        
+        //changes difficulty levels
         let userDefaults = UserDefaults.standard
         if userDefaults.bool(forKey: "hard") {
             difficultyLabelNode.text = "Hard"
@@ -56,9 +59,11 @@ class MenuScene: SKScene {
         let touch = touches.first
         if let location = touch?.location(in: self){
             let nodesArray = self.nodes(at: location)
+            //start new game
             if nodesArray.first == newGameButtonNode {
                 self.rocketBlastoff()
                 self.run(SKAction.wait(forDuration: 1)){
+                    //transitions to game scene
                     let transition = SKTransition.flipVertical(withDuration: 0.5)
                     if let gameScene = SKScene(fileNamed: "GameScene"){
                         gameScene.scaleMode = .aspectFill
@@ -70,6 +75,7 @@ class MenuScene: SKScene {
                 changeDifficulty()
             }else if nodesArray.first == rocket1Node {
                 changeRocket()
+            //demonstrates how to play the game
             }else if nodesArray.first?.name == "howToPlayButton"{
                 self.run(SKAction.wait(forDuration: 1)){
                     let transition = SKTransition.flipVertical(withDuration: 0.5)
@@ -121,6 +127,7 @@ class MenuScene: SKScene {
         return negRocket
     }
     
+    //function to actually change the difficulty
     func changeDifficulty() {
         let userDefaults = UserDefaults.standard
         if difficultyLabelNode.text == "Easy"{
@@ -136,14 +143,22 @@ class MenuScene: SKScene {
         userDefaults.synchronize()
     }
     
+    //creates the impression of a rocket blastoff
     func rocketBlastoff() {
+        //prepares the rocket to move
         rocket1Node.physicsBody = SKPhysicsBody(rectangleOf: rocket1Node.size)
         rocket1Node.physicsBody?.isDynamic = true
+        //orients rocket towards the top
+        let lookAtConstraint = SKConstraint.orient(to: CGPoint(x: 0, y: 400),
+                                                   offset: SKRange(constantValue: -CGFloat.pi / 2))
+        rocket1Node.constraints = [ lookAtConstraint ]
+        //prepares the blastoff to move
         blastoff = SKEmitterNode(fileNamed: "blastoff")
-        blastoff.position.y = rocket1Node.position.y - 10
+        blastoff.position.y = rocket1Node.position.y - 20
         self.addChild(blastoff)
         blastoff.physicsBody = SKPhysicsBody(rectangleOf: rocket1Node.size)
         blastoff.physicsBody?.isDynamic = true
+        //moves both
         var actionArray = [SKAction]()
         actionArray.append(SKAction.move(to: CGPoint(x: rocket1Node.position.x, y: self.frame.size.height + 10), duration: 1))
         actionArray.append(SKAction.removeFromParent())

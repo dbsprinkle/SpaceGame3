@@ -18,11 +18,7 @@ class coinScene: SKScene, SKPhysicsContactDelegate {
     var coinLabel:SKLabelNode!
     
     //creates and updates score label
-    var coins:Int = 0 {
-        didSet{
-            coinLabel.text = "Coins: \(coins)"
-        }
-    }
+    var coins = UserDefaults().integer(forKey: "COINS")
     //bit mask categories to be used in collison testing
     var rocketCategory:UInt32 = 0x1 << 1
     var coinCategory:UInt32 = 0x1 << 0
@@ -53,6 +49,15 @@ class coinScene: SKScene, SKPhysicsContactDelegate {
         self.backgroundColor = customBackgroundColor
         
         //add rocket to the screen
+        let rocketCheck = MenuScene().checkRocket()
+        let coinsCheck = GameScene().checkCoins()
+        print(rocketCheck)
+        if rocketCheck && coinsCheck {
+            rocket = SKSpriteNode(imageNamed: "smallRocketNeg.png")
+        }else{
+            rocket = SKSpriteNode(imageNamed: "smallRocket.png")
+            
+        }
         rocket.position = CGPoint(x: 0 , y: -500)
         self.addChild(rocket)
         
@@ -79,7 +84,7 @@ class coinScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.contactDelegate = self
         
         //create and add label
-        coinLabel = SKLabelNode(text: "Score: \(coins)")
+        coinLabel = SKLabelNode(text: "Coins: \(coins)")
         coinLabel.position = CGPoint(x: -300, y: 600)
         coinLabel.fontName = "PingFangSC-Light"
         coinLabel.fontSize = 32

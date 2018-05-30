@@ -18,7 +18,9 @@ class RestartScene: SKScene {
     var customBackgroundColor = UIColor(red: 0.000, green: 0.001, blue: 0.153, alpha: 1)
     
     override func didMove(to view: SKView) {
+        //sets up the user defaults for the next scene
         UserDefaults().set(false, forKey: "VISITED")
+        UserDefaults().set(3, forKey: "LIVES")
         
         starField = SKEmitterNode(fileNamed: "StarField")
         starField.position = CGPoint(x: 400, y: 1400)
