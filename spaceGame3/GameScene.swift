@@ -95,7 +95,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         physicsWorld.contactDelegate = self
         
         coinLabel = SKLabelNode(text: "Coins: \(coins)")
-        
+        coinLabel.position = CGPoint(x: -300, y: 500)
+        coinLabel.fontName = "PingFangSC-Light"
+        coinLabel.fontSize = 32
+        coinLabel.fontColor = UIColor.white
+        self.addChild(coinLabel)
         
         //create and add label
         scoreLabel = SKLabelNode(text: "Score: 0")
@@ -270,6 +274,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             explosion.removeFromParent()
         }
         score += 1
+        saveHighScore()
         //transitions to coin level once a certian score is reached
         if score > 35{
             let transition = SKTransition.fade(withDuration: 0.5)

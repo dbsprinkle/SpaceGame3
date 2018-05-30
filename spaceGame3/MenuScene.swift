@@ -50,7 +50,7 @@ class MenuScene: SKScene {
         if let location = touch?.location(in: self){
             let nodesArray = self.nodes(at: location)
             if nodesArray.first == newGameButtonNode {
-                //self.rocketBlastoff()
+                self.rocketBlastoff()
                 self.run(SKAction.wait(forDuration: 1)){
                     let transition = SKTransition.flipVertical(withDuration: 0.5)
                     if let gameScene = SKScene(fileNamed: "GameScene"){
